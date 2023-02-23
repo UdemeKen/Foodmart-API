@@ -11,4 +11,5 @@ public interface FavouritesService {
     public BaseResponse removeFromFavourites (Long favouriteId);
 
     FavouriteProductResponse viewAFavouriteProduct(Long favouriteId);
+    FavouriteProductResponse viewAllFavouriteProduct();
 }

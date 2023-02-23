@@ -21,9 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -92,6 +90,32 @@ public class FavouritesServiceImpl implements FavouritesService {
 
         response.setFavouriteProduct(productToProductDto(product));
 
+        return responseCodeUtil.updateResponseData(response, ResponseCodeEnum.SUCCESS);
+    }
+
+    @Override
+    public FavouriteProductResponse viewAllFavouriteProduct() {
+        FavouriteProductResponse response = new FavouriteProductResponse();
+        String email = userUtil.getAuthenticatedUserEmail();
+        Optional<Users> users = userRepository.findByEmail(email);
+        if (users.isEmpty()) {
+            return responseCodeUtil.updateResponseData(response, ResponseCodeEnum.USER_NOT_FOUND);
+        }
+        List<Favourites> favourites = favouritesRepository.findAllByUsersId(users.get().getId());
+        if (favourites.isEmpty()) {
+            return responseCodeUtil.updateResponseData(response, ResponseCodeEnum.ERROR, "No favorite products found");
+        }
+        List<ProductDto> productDtos = new ArrayList<>();
+        for (Favourites favourite : favourites) {
+            Product favouriteProduct = productRepository.findById(favourite.getProductId()).get();
+            ProductDto productDto = new ProductDto();
+            productDto.setProductName(favouriteProduct.getProductName());
+            productDto.setProductPrice(favouriteProduct.getProductPrice());
+            productDto.setImageUrl(favouriteProduct.getImageUrl());
+            productDto.setQuantity(favouriteProduct.getQuantity());
+            productDtos.add(productDto);
+        }
+        response.setFavouriteProduct((ProductDto) productDtos);
         return responseCodeUtil.updateResponseData(response, ResponseCodeEnum.SUCCESS);
     }
 

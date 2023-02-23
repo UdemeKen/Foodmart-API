@@ -2,6 +2,7 @@ package com.example.food.services;
 
 import com.example.food.dto.*;
 import com.example.food.pojos.CreateUserRequest;
+import com.example.food.pojos.LoginResponseDto;
 import com.example.food.restartifacts.BaseResponse;
 import org.springframework.http.ResponseEntity;
 
@@ -9,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 public interface UserService {
 
     BaseResponse signUp(CreateUserRequest createUserRequest);
-    ResponseEntity<String> login(LoginRequestDto request);
+    ResponseEntity<LoginResponseDto> login(LoginRequestDto request);
 
     BaseResponse editUserDetails(EditUserDto editUserDto);
 

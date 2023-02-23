@@ -164,4 +164,23 @@ class ProductServiceImplTest {
         verify(productRepository, times(0)).save(any());
         assertEquals(updatedProductResponse.getDescription(), ResponseCodeEnum.UNAUTHORISED_ACCESS.getDescription());
     }
+
+//    @Test
+//    void deleteProduct() {
+//        Product product = Product.builder()
+//                .id(1L)
+//                .category(Category.builder()
+//                        .categoryId(1L)
+//                        .categoryName("Beverage")
+//                        .build())
+//                .productName("PeakMilk")
+//                .description("Yummy and Testy")
+//                .productPrice(BigDecimal.valueOf(1000.00))
+//                .imageUrl("http://kendrick.com")
+//                .quantity(5)
+//                .build();
+//        when(productRepository.findById(1L)).thenReturn(Optional.ofNullable(product));
+//        productServiceImpl.deleteProduct(1L);
+//        verify(productRepository).delete(product);
+//    }product
 }

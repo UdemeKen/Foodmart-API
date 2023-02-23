@@ -47,7 +47,6 @@ public class UserController {
     @PutMapping("/confirmRegistration")
     public BaseResponse confirmRegistration(@RequestBody ConfirmRegistrationRequestDto confirmRegistrationRequestDto) {
         return userService.confirmRegistration(confirmRegistrationRequestDto);
-
     }
     @PostMapping("/change-password")
     public ResponseEntity<BaseResponse> changePassword(@Valid @RequestBody ChangePasswordDto passwordDto){

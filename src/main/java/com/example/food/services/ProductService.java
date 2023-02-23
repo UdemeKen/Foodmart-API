@@ -18,5 +18,6 @@ public interface ProductService {
     ProductResponse fetchAllProducts();
 
     ProductResponseDto fetchSingleProduct(Long productId);
+    void deleteProduct(Long productId);
 
 }
